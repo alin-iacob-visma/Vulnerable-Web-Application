@@ -27,21 +27,12 @@
     }
     if(isset($_GET["typeBox"])){
       $target =$_GET["typeBox"];
-      $substitutions = array(
-        '&&'=>'',
-        '& ' => '',
-        '&& ' => '',
-        ';'  => '',
-        '|' => '',
-        '-'  => '',
-        '$'  => '',
-        '('  => '',
-        ')'  => '',
-        '`'  => '',
-        '||' => ''
-      );
-      $target = str_replace(array_keys($substitutions),$substitutions,$target);
-      echo shell_exec($target);
+      $allowed_commands = array('ls', 'whoami', 'date'); // Pc551
+      if (in_array($target, $allowed_commands)) {
+        echo shell_exec($target);
+      } else {
+        echo "Command not allowed.";
+      }
       if($_GET["typeBox"] == "secret")
         echo "You really found my secret!";
     }

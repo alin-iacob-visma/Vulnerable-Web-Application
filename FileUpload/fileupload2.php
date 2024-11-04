@@ -27,7 +27,8 @@ if(isset($_POST["submit"])) {
 	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 	$type = $_FILES["file"]["type"];
 
-    if($type != "image/png" && $type != "image/jpeg" ){
+    $allowed_types = array("image/png", "image/jpeg", "image/gif");
+    if(!in_array($type, $allowed_types)){
         echo "JPG, JPEG, PNG & GIF files are allowed.";
         $uploadOk = 0;
     }
